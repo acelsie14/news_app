@@ -5,17 +5,13 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, Feather } from '@expo/vector-icons';
+import { AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import TabBarButton from './TabBarButton';
 
 export default function TabBar({ state, descriptors, navigation }) {
-  const primaryColor = '#0891b2';
+  const primaryColor = '#d90b1f';
   const greyColor = '#737373';
 
-  const icons = {
-    index: (props) => <AntDesign name="home" size={26} {...props} />,
-    explore: (props) => <Feather name="compass" size={26} {...props} />,
-    profile: (props) => <AntDesign name="user" size={26} {...props} />,
-  };
   return (
     <View style={styles.tabbar}>
       {state.routes.map((route, index) => {
@@ -47,30 +43,29 @@ export default function TabBar({ state, descriptors, navigation }) {
             target: route.key,
           });
         };
-
         return (
-          <TouchableOpacity
+          <TabBarButton
             key={route.name}
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
             style={styles.tabbaritem}
-          >
-            {icons[route.name]({
-              color: isFocused ? primaryColor : greyColor,
-            })}
-            <Text
-              style={{
-                color: isFocused ? primaryColor : greyColor,
-                fontSize: 11,
-              }}
-            >
-              {label}
-            </Text>
-          </TouchableOpacity>
+            routeName={route.name}
+            label={label}
+            isFocused={isFocused}
+            color={isFocused ? primaryColor : greyColor}
+          />
         );
+
+        // return (
+        //   <TouchableOpacity
+        //     key={route.name}
+        //     accessibilityState={isFocused ? { selected: true } : {}}
+        //     accessibilityLabel={options.tabBarAccessibilityLabel}
+        //     testID={options.tabBarButtonTestID}
+        //     onPress={onPress}
+        //     onLongPress={onLongPress}
+        //     style={styles.tabbaritem}
+        //   ></TouchableOpacity>
+        // );
       })}
     </View>
   );
@@ -93,11 +88,5 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOpacity: 0.1,
     elevation: 2,
-  },
-  tabbaritem: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 4,
   },
 });

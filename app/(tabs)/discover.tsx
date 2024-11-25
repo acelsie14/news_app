@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export default function profile() {
+const discover = () => {
   return (
     <View style={styles.container}>
-      <Text>profile</Text>
+      <Text>discover</Text>
     </View>
   );
-}
+};
+
+export default discover;
 
 const styles = StyleSheet.create({
   container: {
