@@ -1,14 +1,32 @@
 // @ts-nocheck
 
 // Entire file is ignored by TypeScript
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  LayoutChangeEvent,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useLinkBuilder, useTheme } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import { AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import TabBarButton from './TabBarButton';
+import { useState } from 'react';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
-export default function TabBar({ state, descriptors, navigation }) {
+export default function TabBar({
+  state,
+  descriptors,
+  navigation,
+}: BottomTabBarProps) {
   const primaryColor = '#d90b1f';
   const greyColor = '#737373';
 
@@ -47,7 +65,6 @@ export default function TabBar({ state, descriptors, navigation }) {
           <TabBarButton
             key={route.name}
             onPress={onPress}
-            style={styles.tabbaritem}
             routeName={route.name}
             label={label}
             isFocused={isFocused}

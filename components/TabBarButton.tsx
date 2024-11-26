@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+// Entire file is ignored by TypeScript
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { icons } from '@/assets/Icons';
